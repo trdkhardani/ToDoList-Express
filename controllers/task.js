@@ -30,7 +30,8 @@ exports.postAddTask = (req, res, next) => {
     req.user
     .createTask({
         task_todo: task,
-        category: category
+        category: category,
+        status: false
     })
     .then(result => {
         console.log(result)
