@@ -1,6 +1,10 @@
 <%- include('../includes/header.ejs') %>
     <%- include('../includes/navbar.ejs') %>
+    <br>
     <main>
+        <a href="/add-task"><button type="button" class="btn btn-outline-info">Add Task</button></a>
+        <br>
+        <br>
         <% if(tasks.length > 0) { %>
             <% for(let task of tasks) { %>
             <ul class="list-group">
@@ -9,6 +13,10 @@
                     <label class="form-check-label" for="firstCheckbox">Task: <%= task.task_todo %></label>
                     <br>
                     <label class="form-check-label" for="firstCheckbox">Category: <%= task.category %></label>
+                    <form action="/delete-task" method="POST">
+                        <input type="hidden" name="taskId" value="<%= task.id %>">
+                        <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                    </form>
                 </li>
             </ul>
             <% } %> 
