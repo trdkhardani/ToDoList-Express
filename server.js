@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const taskRouter = require('./routes/task');
 
+const categoryRouter = require('./routes/category');
+
 const app = express()
 
 const port = 3000
@@ -28,7 +30,9 @@ app.use((req, res, next) => { //for magic association method
     })
 })
 
-app.use(taskRouter)
+app.use(taskRouter);
+
+app.use(categoryRouter);
 
 Task.belongsTo(User, {
     constraints: true,

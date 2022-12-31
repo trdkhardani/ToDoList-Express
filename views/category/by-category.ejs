@@ -2,11 +2,7 @@
     <%- include('../includes/navbar.ejs') %>
     <br>
     <main>
-        <a href="/add-task"><button type="button" class="btn btn-outline-info">Add Task</button></a>
-        <br>
-        <br>
-        <h5>Tip: Click the category to see the specific tasks with the related category</h5>
-        <br>
+        <h1>Category: <%= docTitle %></h1>
         <% if(tasks.length > 0) { %>
             <% for(let task of tasks) { %>
             <ul class="list-group">
@@ -16,18 +12,15 @@
                     <% } else { %>
                         <input class="form-check-input me-1" type="checkbox" id="<%= task.id %>">
                         <% } %>  
-                    <label class="form-check-label" for="<%= task.id %>">Task: <%= task.task_todo %></label>
-                    <br>
-                    <label class="form-check-label"><a href="/category/<%= task.category %>">Category: <%= task.category %></a></label>
+                    <label class="form-check-label" for="<%= task.id %>">Task: <%= task.task_todo %></label
+
                     <form action="/delete-task" method="POST">
                         <input type="hidden" name="taskId" value="<%= task.id %>">
                         <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
                     </form>
                 </li>
             </ul>
-            <% } %>
-            <br>
-            <a target="_blank" href="https://www.flaticon.com/free-icons/to-do-list" title="to do list icons">To do list icons created by Flat Icons - Flaticon</a> 
+            <% } %> 
             <% } else { %>  
         <h1>Yay! No tasks to do for now!</h1>
         <% } %> 
