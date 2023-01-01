@@ -15,6 +15,21 @@ exports.getTasks = (req, res, next) => {
     })
 }
 
+exports.getSpecificTasks = (req, res, next) => {
+    const category = req.params.category;
+    Task //SELECT * FROM tasks WHERE category = category
+    .findAll({ where: { category: category } }) 
+    .then(tasks => { 
+        res.render('category/by-category',
+        {
+            tasks: tasks,   
+            docTitle: category,
+            path: '/category',
+        })
+    })
+    .catch(err => console.log(err));
+}
+
 exports.getAddTask = (req, res, next) => {
     res.render('task/add-task', 
     {
