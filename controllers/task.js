@@ -15,21 +15,6 @@ exports.getTasks = (req, res, next) => {
     })
 }
 
-exports.getSpecificTasks = (req, res, next) => {
-    const category = req.params.category;
-    Task //SELECT * FROM tasks WHERE category = category
-    .findAll({ where: { category: category } }) 
-    .then(tasks => { 
-        res.render('category/by-category',
-        {
-            tasks: tasks,   
-            docTitle: category,
-            path: '/category',
-        })
-    })
-    .catch(err => console.log(err));
-}
-
 exports.getAddTask = (req, res, next) => {
     res.render('task/add-task', 
     {
@@ -47,6 +32,46 @@ exports.postAddTask = (req, res, next) => {
         task_todo: task,
         category: category,
         status: false
+    })
+    .then(result => {
+        console.log(result)
+        res.redirect('/')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+exports.getEditTask = (req, res, next) => {
+    const taskId = req.params.taskId;
+    req.user
+    .getTasks({where: {id: taskId}})
+    .then(tasks => {
+        const task = tasks[0];
+        if(!task){
+            return res.redirect('/');
+        }
+        res.render('task/edit-task', 
+        {
+            docTitle: 'Edit Task: ' + task.task_todo,
+            path: '/edit-task',
+            task: task
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+exports.postEditTask = (req, res,next) => {
+    const taskId = req.body.taskId;
+    const editedTask = req.body.task;
+    const editedCategory = req.body.category;
+    Task.findByPk(taskId)
+    .then(task => {
+        task.task_todo = editedTask;
+        task.category = editedCategory;
+        return task.save()
     })
     .then(result => {
         console.log(result)

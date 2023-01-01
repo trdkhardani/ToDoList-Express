@@ -10,6 +10,10 @@ router.get('/add-task', TaskController.getAddTask)
 
 router.post('/add-task', TaskController.postAddTask)
 
+router.get('/edit-task/:taskId', TaskController.getEditTask)
+
+router.post('/edit-task', TaskController.postEditTask)
+
 router.post('/delete-task', TaskController.postDeleteTask)
 
 module.exports = router;

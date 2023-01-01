@@ -1,9 +1,9 @@
 const express = require('express');
 
-const TaskController = require('../controllers/task')
+const CategoryController = require('../controllers/category')
 
 const router = express.Router();
 
-router.get('/category/:category', TaskController.getSpecificTasks)
+router.get('/category/:category', CategoryController.getSpecificTasks)
 
 module.exports = router;

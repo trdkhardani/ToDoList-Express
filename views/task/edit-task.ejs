@@ -1,0 +1,27 @@
+<%- include('../includes/header.ejs') %>
+    <%- include('../includes/navbar.ejs') %>
+    <br>
+    <main>
+       <form action="/edit-task" method="POST">
+         <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Task</span>
+            <input type="text" class="form-control" placeholder="What to do?" name="task" value="<%= task.task_todo %>">
+          </div>
+         <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Category</span>
+            <select class="form-select" aria-label="Default select example" name="category">
+               <option selected><%= task.category %></option>
+               <option value="Daily">Daily</option>
+               <option value="Personal">Personal</option>
+               <option value="Work">Work</option>
+               <option value="School">School</option>
+               <option value="College">College</option>
+               <option value="Chores">Chores</option>
+               <option value="Others">Others</option>
+             </select>
+          </div>
+          <input type="hidden" value="<%= task.id %>" name="taskId">
+          <button type="submit" class="btn btn-outline-info">Edit</button>
+       </form>
+    </main>
+    <%- include('../includes/footer.ejs') %>
