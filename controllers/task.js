@@ -82,6 +82,22 @@ exports.postEditTask = (req, res,next) => {
     })
 }
 
+exports.checkTask = (req, res, next) => {
+    const taskId = req.body.taskId;
+    Task.findByPk(taskId)
+    .then(task => {
+        task.status = !task.status;
+        return task.save()
+    })
+    .then(result => {
+        console.log(result)
+        res.redirect('/')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 exports.postDeleteTask = (req, res, next) => {
     const taskId = req.body.taskId;
     Task.findByPk(taskId)

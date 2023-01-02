@@ -7,13 +7,18 @@
             <% for(let task of tasks) { %>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <% if(task.status) { %> 
-                    <input class="form-check-input me-1" type="checkbox" id="<%= task.id %>" checked>
-                    <% } else { %>
-                        <input class="form-check-input me-1" type="checkbox" id="<%= task.id %>">
-                        <% } %>  
-                    <label class="form-check-label" for="<%= task.id %>">Task: <%= task.task_todo %></label
-
+                    <form action="/check-task" method="POST">
+                        <% if(task.status) { %>
+                        <label><%= task.task_todo %></label> 
+                        <input type="hidden" name="taskId" value="<%= task.id %>">
+                        <button type="submit" class="btn btn-sm btn-success"><i class="bi bi-check-lg"></i></button>
+                        <% } else { %>
+                        <label><%= task.task_todo %></label> 
+                        <input type="hidden" name="taskId" value="<%= task.id %>">
+                        <button type="submit" class="btn btn-sm btn-light"><i class="bi bi-check-lg"></i></button>
+                            <% } %>  
+                    </form>
+                    <a href="/edit-task/<%= task.id %>?edit=true"><button type="button" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></button></a>
                     <form action="/delete-task" method="POST">
                         <input type="hidden" name="taskId" value="<%= task.id %>">
                         <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>

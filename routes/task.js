@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/', TaskController.getTasks)
 
+router.post('/check-task', TaskController.checkTask)
+
 router.get('/add-task', TaskController.getAddTask)
 
 router.post('/add-task', TaskController.postAddTask)
